@@ -1,15 +1,16 @@
 
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const navItems = [
-    { name: 'Works', href: '#works' },
-    { name: 'Tools', href: '#tools' },
-    { name: 'Contact', href: '#contact' },
-    { name: 'Resume', href: '#resume' }
+    { name: 'Home', href: '/' },
+    { name: 'Tools', href: '/tools' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -17,22 +18,22 @@ const Navigation = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
-            <div className="w-10 h-10 bg-gradient-to-br from-gold to-gold/80 rounded-lg flex items-center justify-center animate-logo-float">
+          <Link to="/" className="flex items-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-gold to-gold/80 rounded-lg flex items-center justify-center animate-logo-float hover:scale-110 transition-transform duration-300">
               <span className="text-xl font-bold text-gold-foreground">B</span>
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
-              <a
+              <Link
                 key={item.name}
-                href={item.href}
-                className="nav-link"
+                to={item.href}
+                className={`nav-link ${location.pathname === item.href ? 'text-gold' : ''}`}
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -50,14 +51,14 @@ const Navigation = () => {
           <div className="md:hidden mt-4 pb-4">
             <div className="flex flex-col space-y-4">
               {navItems.map((item) => (
-                <a
+                <Link
                   key={item.name}
-                  href={item.href}
-                  className="nav-link"
+                  to={item.href}
+                  className={`nav-link ${location.pathname === item.href ? 'text-gold' : ''}`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>

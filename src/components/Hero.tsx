@@ -1,5 +1,6 @@
 
-import { Github, Linkedin, Twitter, ArrowDown } from 'lucide-react';
+import { Github, Linkedin, Twitter, ArrowDown, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const socialLinks = [
@@ -28,12 +29,23 @@ const Hero = () => {
             I'm A Software Developer
           </p>
           
-          <p className="text-lg text-muted-foreground/80 mb-12 animate-fade-in animate-delay-400">
+          <p className="text-lg text-muted-foreground/80 mb-8 animate-fade-in animate-delay-400">
             Building AI-Powered Solutions & Modern Web Applications
           </p>
 
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in animate-delay-500">
+            <Link to="/tools" className="btn-hero inline-flex items-center gap-2">
+              <Zap size={18} />
+              Explore My AI Tools
+            </Link>
+            <Link to="/contact" className="btn-outline inline-flex items-center gap-2">
+              Let's Connect
+            </Link>
+          </div>
+
           {/* Social Links */}
-          <div className="flex justify-center space-x-8 mb-16 animate-fade-in animate-delay-500">
+          <div className="flex justify-center space-x-8 mb-16 animate-fade-in animate-delay-600">
             {socialLinks.map(({ icon: Icon, href, label }) => (
               <a
                 key={label}
