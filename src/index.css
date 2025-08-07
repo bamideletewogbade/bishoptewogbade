@@ -108,7 +108,7 @@
   
   /* Service card variants */
   .service-card {
-    @apply glass hover-glow p-6 rounded-lg group cursor-pointer;
+    @apply glass hover-glow p-6 rounded-lg cursor-pointer;
     @apply hover:bg-accent/50 hover:border-gold/30;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
