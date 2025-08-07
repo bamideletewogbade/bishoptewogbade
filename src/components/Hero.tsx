@@ -19,19 +19,26 @@ const Hero = () => {
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Main Heading */}
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 animate-fade-in">
-            <span className="block text-foreground mb-4">My Name Is</span>
-            <span className="hero-gradient animate-delay-200">Bamidele</span>
-          </h1>
+          <div className="mb-8 animate-fade-in">
+            <h2 className="text-3xl md:text-4xl font-medium mb-4 text-muted-foreground flex items-center justify-center gap-3">
+              <span className="text-4xl">👋🏾</span>
+              About Me
+            </h2>
+            <h1 className="text-6xl md:text-8xl font-bold mb-6">
+              <span className="block text-foreground mb-4">I'm</span>
+              <span className="hero-gradient animate-delay-200">Bamidele</span>
+            </h1>
+          </div>
 
-          {/* Subtitle */}
-          <p className="text-xl md:text-2xl text-muted-foreground mb-4 animate-fade-in animate-delay-300">
-            I'm A Software Developer
-          </p>
-          
-          <p className="text-lg text-muted-foreground/80 mb-8 animate-fade-in animate-delay-400">
-            Building AI-Powered Solutions & Modern Web Applications
-          </p>
+          {/* Enhanced About Text */}
+          <div className="mb-12 animate-fade-in animate-delay-300">
+            <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed">
+              A software engineer building impactful digital experiences across AI, web, and mobile.
+            </p>
+            <p className="text-lg text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed animate-fade-in animate-delay-400">
+              From fintech APIs to AI-powered tools and sleek Flutter apps, I help ideas go from concept to code — fast, secure, and scalable.
+            </p>
+          </div>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in animate-delay-500">

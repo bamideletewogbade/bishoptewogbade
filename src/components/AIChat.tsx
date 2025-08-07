@@ -82,7 +82,7 @@ const AIChat = () => {
       <div className="fixed bottom-6 right-6 z-50">
         <button
           onClick={() => setIsMinimized(false)}
-          className="w-16 h-16 bg-gradient-to-r from-gold to-gold/80 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 animate-pulse"
+          className="w-16 h-16 bg-gradient-to-r from-gold to-gold/80 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300"
         >
           <MessageCircle size={24} className="text-gold-foreground" />
         </button>
