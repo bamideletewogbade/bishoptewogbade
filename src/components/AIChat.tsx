@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from 'react';
-import { Send, Bot, User, Sparkles, MessageCircle } from 'lucide-react';
+import { Send, Bot, User, Sparkles, MessageCircle, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface Message {
