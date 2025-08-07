@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Download } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
@@ -9,9 +9,20 @@ const Navigation = () => {
 
   const navItems = [
     { name: 'Home', href: '/' },
+    { name: 'Services', href: '/#services' },
+    { name: 'Works', href: '/#projects' },
     { name: 'Tools', href: '/tools' },
     { name: 'Contact', href: '/contact' },
   ];
+
+  const handleResumeDownload = () => {
+    // You can replace this with your actual resume URL
+    const resumeUrl = '/resume.pdf';
+    const link = document.createElement('a');
+    link.href = resumeUrl;
+    link.download = 'Bamidele_Resume.pdf';
+    link.click();
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 glass">
@@ -19,7 +30,7 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center">
-            <div className="w-10 h-10 bg-gradient-to-br from-gold to-gold/80 rounded-lg flex items-center justify-center animate-logo-float hover:scale-110 transition-transform duration-300">
+            <div className="w-10 h-10 bg-gradient-to-br from-gold to-gold/80 rounded-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
               <span className="text-xl font-bold text-gold-foreground">B</span>
             </div>
           </Link>
@@ -35,6 +46,13 @@ const Navigation = () => {
                 {item.name}
               </Link>
             ))}
+            <button
+              onClick={handleResumeDownload}
+              className="btn-outline flex items-center gap-2"
+            >
+              <Download size={16} />
+              Resume
+            </button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -60,6 +78,16 @@ const Navigation = () => {
                   {item.name}
                 </Link>
               ))}
+              <button
+                onClick={() => {
+                  handleResumeDownload();
+                  setIsOpen(false);
+                }}
+                className="btn-outline flex items-center gap-2 w-fit"
+              >
+                <Download size={16} />
+                Resume
+              </button>
             </div>
           </div>
         )}

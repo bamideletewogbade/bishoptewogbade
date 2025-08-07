@@ -7,6 +7,7 @@ import Projects from '../components/Projects';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import LoadingScreen from '../components/LoadingScreen';
+import AIChat from '../components/AIChat';
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,6 +27,7 @@ const Index = () => {
         <Projects />
         <Contact />
         <Footer />
+        <AIChat />
       </div>
     </div>
   );

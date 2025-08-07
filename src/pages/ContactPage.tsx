@@ -1,30 +1,8 @@
 
 import { Mail, MapPin, Phone, Send, MessageCircle, Calendar, Linkedin, Github, Twitter } from 'lucide-react';
-import { useState } from 'react';
+import AIChat from '../components/AIChat';
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
-
-  const [activeCard, setActiveCard] = useState<string | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission here
-  };
-
   const contactMethods = [
     {
       id: 'email',
@@ -73,13 +51,13 @@ const ContactPage = () => {
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-in animate-delay-200">
               Ready to transform your ideas into intelligent solutions? 
-              Let's discuss your next AI-powered project.
+              Chat with my AI assistant or reach out directly.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {/* Contact Methods */}
-            <div className="xl:col-span-1 space-y-6 animate-fade-in animate-delay-300">
+            <div className="space-y-6 animate-fade-in animate-delay-300">
               <h2 className="text-2xl font-semibold mb-6 text-foreground">Get In Touch</h2>
               
               {contactMethods.map((method) => {
@@ -89,8 +67,6 @@ const ContactPage = () => {
                     key={method.id}
                     href={method.link}
                     className="block glass hover-glow p-6 rounded-xl border border-border/20 hover:border-gold/30 transition-all duration-300 group"
-                    onMouseEnter={() => setActiveCard(method.id)}
-                    onMouseLeave={() => setActiveCard(null)}
                   >
                     <div className="flex items-start gap-4">
                       <div className={`w-12 h-12 bg-gradient-to-br ${method.color} rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
@@ -103,11 +79,7 @@ const ContactPage = () => {
                         <p className="text-sm text-gold font-medium">{method.value}</p>
                         <p className="text-xs text-muted-foreground mt-1">{method.description}</p>
                       </div>
-                      <div className={`transition-transform duration-300 ${
-                        activeCard === method.id ? 'translate-x-1' : ''
-                      }`}>
-                        <Send size={14} className="text-muted-foreground group-hover:text-gold" />
-                      </div>
+                      <Send size={14} className="text-muted-foreground group-hover:text-gold transition-colors duration-300" />
                     </div>
                   </a>
                 );
@@ -133,91 +105,42 @@ const ContactPage = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
-            <div className="xl:col-span-2 animate-fade-in animate-delay-400">
+            {/* AI Chat Showcase */}
+            <div className="animate-fade-in animate-delay-400">
               <div className="glass p-8 rounded-2xl border border-border/20">
-                <h2 className="text-2xl font-semibold mb-6 text-foreground">Send me a message</h2>
-                
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium text-foreground">
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-accent/30 border border-border/20 rounded-lg focus:ring-2 focus:ring-gold/50 focus:border-gold/50 transition-all duration-200 text-foreground placeholder-muted-foreground"
-                        placeholder="John Doe"
-                        required
-                      />
-                    </div>
-                    
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium text-foreground">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full px-4 py-3 bg-accent/30 border border-border/20 rounded-lg focus:ring-2 focus:ring-gold/50 focus:border-gold/50 transition-all duration-200 text-foreground placeholder-muted-foreground"
-                        placeholder="john@example.com"
-                        required
-                      />
-                    </div>
+                <div className="text-center mb-6">
+                  <div className="w-20 h-20 bg-gradient-to-r from-gold/20 to-gold/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <MessageCircle size={32} className="text-gold" />
                   </div>
+                  <h2 className="text-2xl font-semibold mb-4 text-foreground">AI Assistant</h2>
+                  <p className="text-muted-foreground mb-6">
+                    Get instant answers about my experience, skills, and projects through my AI-powered assistant.
+                  </p>
+                </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium text-foreground">
-                      Subject
-                    </label>
-                    <input
-                      type="text"
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 bg-accent/30 border border-border/20 rounded-lg focus:ring-2 focus:ring-gold/50 focus:border-gold/50 transition-all duration-200 text-foreground placeholder-muted-foreground"
-                      placeholder="Let's discuss your AI project..."
-                      required
-                    />
+                <div className="space-y-4 mb-6">
+                  <div className="p-4 bg-accent/20 rounded-lg border border-border/10">
+                    <p className="text-sm text-foreground font-medium mb-2">💼 "What's your experience with AI development?"</p>
+                    <p className="text-xs text-muted-foreground">Ask about my professional background</p>
                   </div>
+                  
+                  <div className="p-4 bg-accent/20 rounded-lg border border-border/10">
+                    <p className="text-sm text-foreground font-medium mb-2">🚀 "Show me your latest projects"</p>
+                    <p className="text-xs text-muted-foreground">Explore my portfolio and work</p>
+                  </div>
+                  
+                  <div className="p-4 bg-accent/20 rounded-lg border border-border/10">
+                    <p className="text-sm text-foreground font-medium mb-2">🛠️ "What tools and technologies do you use?"</p>
+                    <p className="text-xs text-muted-foreground">Learn about my technical stack</p>
+                  </div>
+                </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium text-foreground">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={6}
-                      className="w-full px-4 py-3 bg-accent/30 border border-border/20 rounded-lg focus:ring-2 focus:ring-gold/50 focus:border-gold/50 transition-all duration-200 text-foreground placeholder-muted-foreground resize-none"
-                      placeholder="Tell me about your project, goals, and how I can help..."
-                      required
-                    />
+                <div className="text-center">
+                  <div className="inline-flex items-center gap-2 text-sm text-gold bg-gold/10 px-4 py-2 rounded-full">
+                    <div className="w-2 h-2 bg-gold rounded-full animate-pulse"></div>
+                    Chat available 24/7 • Powered by Gemini
                   </div>
-
-                  <div className="flex items-center justify-between pt-4">
-                    <p className="text-sm text-muted-foreground">
-                      I typically respond within 24 hours
-                    </p>
-                    <button
-                      type="submit"
-                      className="btn-hero flex items-center gap-2 group"
-                    >
-                      <Send size={16} className="group-hover:translate-x-1 transition-transform duration-200" />
-                      Send Message
-                    </button>
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
@@ -234,6 +157,8 @@ const ContactPage = () => {
           </div>
         </div>
       </section>
+      
+      <AIChat />
     </div>
   );
 };
