@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ExternalLink, Github, ArrowRight, Calendar, Users, Code, Zap } from 'lucide-react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
