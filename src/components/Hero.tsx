@@ -1,42 +1,52 @@
-
 import { Github, Linkedin, Twitter, ArrowDown, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
   const socialLinks = [
-    { icon: Twitter, href: '#', label: 'Twitter' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Github, href: '#', label: 'GitHub' }
+    { icon: Twitter, href: 'https://x.com/_tewogbade', label: 'Twitter' },
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/bamidele-tewogbade/', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/bamideletewogbade', label: 'GitHub' }
   ];
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative">
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      {/* Background Video */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover opacity-40"
+        >
+          <source src="/use.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Video Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-dark/80 via-dark-lighter/70 to-dark/80"></div>
+      </div>
+
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-dark via-dark-lighter to-dark opacity-50"></div>
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-glow-pulse"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gold/5 rounded-full blur-3xl animate-glow-pulse animation-delay-1000"></div>
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold/10 rounded-full blur-3xl animate-glow-pulse z-1"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gold/5 rounded-full blur-3xl animate-glow-pulse animation-delay-1000 z-1"></div>
 
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Main Heading */}
-          <div className="mb-8 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl font-medium mb-4 text-muted-foreground flex items-center justify-center gap-3">
-              <span className="text-4xl">👋🏾</span>
-              About Me
-            </h2>
-            <h1 className="text-6xl md:text-8xl font-bold mb-6">
-              <span className="block text-foreground mb-4">I'm</span>
+          <div className="mb-8 animate-fade-in mt-24">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">
+              <span className="block text-foreground mb-4 text-xl md:text-4xl font-bold">Hi👋🏾, I'm</span>
               <span className="hero-gradient animate-delay-200">Bamidele</span>
             </h1>
           </div>
 
           {/* Enhanced About Text */}
           <div className="mb-12 animate-fade-in animate-delay-300">
-            <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed">
-              A software engineer building impactful digital experiences across AI, web, and mobile.
+            <p className="text-xl md:text-2xl text-muted-foreground mb-6 leading-relaxed font-light">
+              A software engineer building impactful digital experiences across <span className="text-orange-400">AI</span>, <span className="text-orange-400">web</span>, and <span className="text-orange-400">mobile</span> platforms.
             </p>
             <p className="text-lg text-muted-foreground/80 max-w-3xl mx-auto leading-relaxed animate-fade-in animate-delay-400">
-              From fintech APIs to AI-powered tools and sleek Flutter apps, I help ideas go from concept to code — fast, secure, and scalable.
+              From AI-powered tools to elegant web and mobile apps, I transform ideas into reality — delivering solutions that are fast, secure, and built to scale.
             </p>
           </div>
 

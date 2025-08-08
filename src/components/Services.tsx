@@ -19,19 +19,7 @@ const Services = () => {
       icon: Smartphone,
       title: 'Mobile Apps',
       description: 'Cross-platform mobile applications with native performance and modern UI.',
-      features: ['Flutter Development', 'Firebase Integration', 'Responsive Design']
-    },
-    {
-      icon: Database,
-      title: 'Fintech Engineering',
-      description: 'Secure financial applications with payment integrations and banking APIs.',
-      features: ['Payment Gateways', 'Core Banking', 'Security Implementation']
-    },
-    {
-      icon: Zap,
-      title: 'DevOps & Tools',
-      description: 'Development infrastructure, automation, and developer productivity tools.',
-      features: ['CI/CD Pipelines', 'Testing Automation', 'Code Analysis']
+      features: ['Flutter Development', 'Database Integration', 'Responsive Design']
     },
     {
       icon: Code,

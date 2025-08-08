@@ -23,8 +23,8 @@ const Index = () => {
       <div className={`transition-opacity duration-500 ${isLoading ? 'opacity-0' : 'opacity-100'}`}>
         <Navigation />
         <Hero />
-        <Services />
         <Projects />
+        <Services />
         <Contact />
         <Footer />
         <AIChat />
