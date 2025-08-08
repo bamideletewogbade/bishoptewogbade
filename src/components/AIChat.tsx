@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Send, Bot, User, Sparkles, MessageCircle, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 
 interface Message {
   id: string;
@@ -21,7 +22,7 @@ const AIChat = () => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(true); // Start minimized
+  const [isMinimized, setIsMinimized] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -44,28 +45,49 @@ const AIChat = () => {
     };
 
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputMessage;
     setInputMessage('');
     setIsLoading(true);
 
     try {
-      // For now, we'll simulate an AI response
-      // In the next step, we'll connect this to Google Gemini
-      setTimeout(() => {
-        const aiResponse: Message = {
-          id: (Date.now() + 1).toString(),
-          text: "Thanks for your question! I'm currently being enhanced with Google Gemini AI. For now, please feel free to explore Bamidele's portfolio, check out his projects, or reach out directly through the contact methods above. I'll be fully operational soon!",
-          sender: 'ai',
-          timestamp: new Date()
-        };
-        setMessages(prev => [...prev, aiResponse]);
-        setIsLoading(false);
-      }, 1500);
+      console.log('Sending message to AI chat function:', currentInput);
+      
+      const { data, error } = await supabase.functions.invoke('ai-chat', {
+        body: { message: currentInput }
+      });
+
+      console.log('Response from AI chat function:', data, error);
+
+      if (error) {
+        throw new Error(error.message || 'Failed to get AI response');
+      }
+
+      const aiResponse: Message = {
+        id: (Date.now() + 1).toString(),
+        text: data.response || "I'm sorry, I couldn't process your request at the moment. Please try again.",
+        sender: 'ai',
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, aiResponse]);
     } catch (error) {
+      console.error('Error sending message:', error);
+      
+      const errorMessage: Message = {
+        id: (Date.now() + 1).toString(),
+        text: "I'm experiencing some technical difficulties. Please try again in a moment or contact Bamidele directly through the contact information above.",
+        sender: 'ai',
+        timestamp: new Date()
+      };
+      
+      setMessages(prev => [...prev, errorMessage]);
+      
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again.",
+        title: "Connection Error",
+        description: "Unable to connect to AI assistant. Please try again.",
         variant: "destructive"
       });
+    } finally {
       setIsLoading(false);
     }
   };
@@ -136,7 +158,7 @@ const AIChat = () => {
                     : 'glass border border-border/20'
                 }`}
               >
-                <p className="text-sm">{message.text}</p>
+                <p className="text-sm whitespace-pre-wrap">{message.text}</p>
               </div>
               {message.sender === 'user' && (
                 <div className="w-8 h-8 bg-gradient-to-r from-gold to-gold/80 rounded-full flex items-center justify-center flex-shrink-0">
