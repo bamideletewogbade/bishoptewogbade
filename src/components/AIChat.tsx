@@ -21,7 +21,7 @@ const AIChat = () => {
   ]);
   const [inputMessage, setInputMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true); // Start minimized
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
