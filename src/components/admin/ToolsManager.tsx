@@ -218,7 +218,7 @@ export const ToolsManager = () => {
                 <Button type="submit" className="flex-1">
                   {editingTool ? 'Update' : 'Create'}
                 </Button>
-                <Button type="button" variant="outline" onClick={resetForm">
+                <Button type="button" variant="outline" onClick={resetForm}>
                   Cancel
                 </Button>
               </div>
