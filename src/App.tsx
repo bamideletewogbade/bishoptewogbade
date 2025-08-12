@@ -1,5 +1,4 @@
 
-import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,33 +10,27 @@ import Tools from "./pages/Tools";
 import ContactPage from "./pages/ContactPage";
 import ServicesPage from "./pages/ServicesPage";
 import WorksPage from "./pages/WorksPage";
-import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
-export default function App() {
-  console.log("App component rendering");
-  console.log("React object:", React);
-  console.log("React.useEffect:", React.useEffect);
-  
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/works" element={<WorksPage />} />
-            <Route path="/tools" element={<Tools />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/admin" element={<Admin />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-}
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <TooltipProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/works" element={<WorksPage />} />
+          <Route path="/tools" element={<Tools />} />
+          <Route path="/contact" element={<ContactPage />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </TooltipProvider>
+  </QueryClientProvider>
+);
+
+export default App;

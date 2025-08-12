@@ -14,183 +14,16 @@ export type Database = {
   }
   public: {
     Tables: {
-      admin_settings: {
-        Row: {
-          created_at: string
-          id: string
-          key: string
-          updated_at: string
-          value: string | null
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          key: string
-          updated_at?: string
-          value?: string | null
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          key?: string
-          updated_at?: string
-          value?: string | null
-        }
-        Relationships: []
-      }
-      profiles: {
-        Row: {
-          created_at: string
-          email: string | null
-          id: string
-          role: Database["public"]["Enums"]["user_role"] | null
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          email?: string | null
-          id: string
-          role?: Database["public"]["Enums"]["user_role"] | null
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          email?: string | null
-          id?: string
-          role?: Database["public"]["Enums"]["user_role"] | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      services: {
-        Row: {
-          created_at: string
-          description: string
-          features: string[]
-          icon: string
-          id: string
-          sort_order: number | null
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          description: string
-          features?: string[]
-          icon: string
-          id?: string
-          sort_order?: number | null
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          description?: string
-          features?: string[]
-          icon?: string
-          id?: string
-          sort_order?: number | null
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      tools: {
-        Row: {
-          color_gradient: string
-          created_at: string
-          description: string
-          features: string[]
-          icon: string
-          id: string
-          link: string | null
-          sort_order: number | null
-          status: string
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          color_gradient: string
-          created_at?: string
-          description: string
-          features?: string[]
-          icon: string
-          id?: string
-          link?: string | null
-          sort_order?: number | null
-          status?: string
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          color_gradient?: string
-          created_at?: string
-          description?: string
-          features?: string[]
-          icon?: string
-          id?: string
-          link?: string | null
-          sort_order?: number | null
-          status?: string
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      works: {
-        Row: {
-          code_link: string | null
-          created_at: string
-          demo_link: string | null
-          description: string
-          featured: boolean | null
-          id: string
-          image_url: string | null
-          sort_order: number | null
-          technologies: string[]
-          title: string
-          updated_at: string
-        }
-        Insert: {
-          code_link?: string | null
-          created_at?: string
-          demo_link?: string | null
-          description: string
-          featured?: boolean | null
-          id?: string
-          image_url?: string | null
-          sort_order?: number | null
-          technologies?: string[]
-          title: string
-          updated_at?: string
-        }
-        Update: {
-          code_link?: string | null
-          created_at?: string
-          demo_link?: string | null
-          description?: string
-          featured?: boolean | null
-          id?: string
-          image_url?: string | null
-          sort_order?: number | null
-          technologies?: string[]
-          title?: string
-          updated_at?: string
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      is_admin: {
-        Args: { user_id: string }
-        Returns: boolean
-      }
+      [_ in never]: never
     }
     Enums: {
-      user_role: "admin" | "user"
+      [_ in never]: never
     }
     CompositeTypes: {
       [_ in never]: never
@@ -317,8 +150,6 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {
-      user_role: ["admin", "user"],
-    },
+    Enums: {},
   },
 } as const
