@@ -1,5 +1,5 @@
 
-import * as React from "react";
+import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,7 +15,11 @@ import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
-function App() {
+export default function App() {
+  console.log("App component rendering");
+  console.log("React object:", React);
+  console.log("React.useEffect:", React.useEffect);
+  
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -37,5 +41,3 @@ function App() {
     </QueryClientProvider>
   );
 }
-
-export default App;
