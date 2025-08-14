@@ -11,6 +11,7 @@ import Tools from "./pages/Tools";
 import ContactPage from "./pages/ContactPage";
 import ServicesPage from "./pages/ServicesPage";
 import WorksPage from "./pages/WorksPage";
+import BlogPage from "./pages/BlogPage";
 import AdminPage from "./pages/AdminPage";
 
 const queryClient = new QueryClient();
@@ -27,6 +28,8 @@ const App = () => (
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/works" element={<WorksPage />} />
             <Route path="/tools" element={<Tools />} />
+            <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/admin" element={<AdminPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

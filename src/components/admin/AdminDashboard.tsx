@@ -7,7 +7,8 @@ import { useAuth } from '@/hooks/useAuth';
 import { ServiceManager } from './ServiceManager';
 import { WorksManager } from './WorksManager';
 import { ToolsManager } from './ToolsManager';
-import { LogOut, Settings, Briefcase, Wrench } from 'lucide-react';
+import { BlogManager } from './BlogManager';
+import { LogOut, Settings, Briefcase, Wrench, FileText } from 'lucide-react';
 import { toast } from 'sonner';
 
 export const AdminDashboard = () => {
@@ -40,8 +41,12 @@ export const AdminDashboard = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <Tabs defaultValue="services" className="w-full">
-          <TabsList className="grid w-full grid-cols-3">
+        <Tabs defaultValue="blog" className="w-full">
+          <TabsList className="grid w-full grid-cols-4">
+            <TabsTrigger value="blog" className="flex items-center gap-2">
+              <FileText className="w-4 h-4" />
+              Blog
+            </TabsTrigger>
             <TabsTrigger value="services" className="flex items-center gap-2">
               <Settings className="w-4 h-4" />
               Services
@@ -55,6 +60,10 @@ export const AdminDashboard = () => {
               Tools
             </TabsTrigger>
           </TabsList>
+
+          <TabsContent value="blog" className="mt-6">
+            <BlogManager />
+          </TabsContent>
 
           <TabsContent value="services" className="mt-6">
             <ServiceManager />
