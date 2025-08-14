@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useAuth } from '@/hooks/useAuth';
+import { CreateAdminButton } from './CreateAdminButton';
 import { toast } from 'sonner';
 
 export const AdminLogin = () => {
@@ -31,6 +32,11 @@ export const AdminLogin = () => {
     }
   };
 
+  const handleQuickFill = () => {
+    setEmail('admin@example.com');
+    setPassword('admin123');
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <Card className="w-[400px]">
@@ -41,6 +47,8 @@ export const AdminLogin = () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
+          <CreateAdminButton />
+          
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Input
@@ -60,9 +68,18 @@ export const AdminLogin = () => {
                 required
               />
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? 'Signing in...' : 'Sign In'}
-            </Button>
+            <div className="flex gap-2">
+              <Button type="submit" className="flex-1" disabled={loading}>
+                {loading ? 'Signing in...' : 'Sign In'}
+              </Button>
+              <Button 
+                type="button" 
+                variant="outline" 
+                onClick={handleQuickFill}
+              >
+                Quick Fill
+              </Button>
+            </div>
           </form>
         </CardContent>
       </Card>
