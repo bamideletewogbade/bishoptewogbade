@@ -1,4 +1,4 @@
-import { Brain, FileText, Search, Zap, ArrowRight, ExternalLink } from 'lucide-react';
+import { Brain, FileText, Search, Zap, ArrowRight, ExternalLink, TrendingUp } from 'lucide-react';
 import { useState } from 'react';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
@@ -11,11 +11,11 @@ const Tools = () => {
     {
       id: 'resume-analyzer',
       title: 'AI Resume Analyzer',
-      description: 'Intelligent resume analysis with skill matching and improvement suggestions using advanced NLP.',
+      description: 'Intelligent resume analysis with skill matching and improvement suggestions using latest large language Models.',
       icon: FileText,
       color: 'from-blue-500/20 to-purple-500/20',
       features: ['ATS Compatibility Check', 'Skill Gap Analysis', 'Keyword Optimization'],
-      status: 'Live',
+      status: 'Coming Soon',
       link: '#'
     },
     {
@@ -25,16 +25,16 @@ const Tools = () => {
       icon: Search,
       color: 'from-green-500/20 to-teal-500/20',
       features: ['Risk Assessment', 'Key Terms Extraction', 'Legal Compliance Check'],
-      status: 'Beta',
+      status: 'Coming Soon',
       link: '#'
     },
     {
       id: 'text-summarizer',
-      title: 'Document Summarizer',
-      description: 'Transform lengthy documents into concise, actionable summaries with AI precision.',
-      icon: Brain,
-      color: 'from-orange-500/20 to-red-500/20',
-      features: ['Multi-format Support', 'Custom Summary Length', 'Key Insights Highlight'],
+      title: 'Stock Market Analyzer',
+      description: 'Decode market trends and charts with AI-powered analysis that explains complex financial data in simple terms.',
+      icon: TrendingUp, // or BarChart3, LineChart, Activity
+      color: 'from-green-500/20 to-emerald-500/20',
+      features: ['Real-time Chart Analysis', 'Market Trend Explanation', 'Plain English Insights'],
       status: 'Coming Soon',
       link: '#'
     },
@@ -45,7 +45,7 @@ const Tools = () => {
       icon: Zap,
       color: 'from-purple-500/20 to-pink-500/20',
       features: ['Pattern Recognition', 'Predictive Analytics', 'Auto Visualization'],
-      status: 'Live',
+      status: 'Coming Soon',
       link: '#'
     }
   ];

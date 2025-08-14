@@ -11,7 +11,7 @@ const ServicesPage = () => {
       title: 'AI Solutions',
       description: 'Custom AI integrations, chatbots, and machine learning models for modern applications.',
       features: ['LLM Integration', 'Predictive Analytics', 'Automation Tools', 'Custom AI Models'],
-      price: 'From $2,500',
+      price: 'From $1,000',
       timeline: '2-4 weeks'
     },
     {
@@ -19,7 +19,7 @@ const ServicesPage = () => {
       title: 'Web Development',
       description: 'Modern, responsive web applications built with cutting-edge technologies.',
       features: ['React/Next.js', 'Full-Stack Solutions', 'Performance Optimization', 'SEO Implementation'],
-      price: 'From $1,800',
+      price: 'From $800',
       timeline: '1-3 weeks'
     },
     {
@@ -27,31 +27,15 @@ const ServicesPage = () => {
       title: 'Mobile Apps',
       description: 'Cross-platform mobile applications with native performance and modern UI.',
       features: ['Flutter Development', 'Firebase Integration', 'Responsive Design', 'App Store Deployment'],
-      price: 'From $3,000',
-      timeline: '3-6 weeks'
-    },
-    {
-      icon: Database,
-      title: 'Fintech Engineering',
-      description: 'Secure financial applications with payment integrations and banking APIs.',
-      features: ['Payment Gateways', 'Core Banking', 'Security Implementation', 'Compliance'],
-      price: 'From $4,000',
-      timeline: '4-8 weeks'
-    },
-    {
-      icon: Zap,
-      title: 'DevOps & Tools',
-      description: 'Development infrastructure, automation, and developer productivity tools.',
-      features: ['CI/CD Pipelines', 'Testing Automation', 'Code Analysis', 'Cloud Deployment'],
       price: 'From $1,500',
-      timeline: '1-2 weeks'
+      timeline: '3-6 weeks'
     },
     {
       icon: Code,
       title: 'Consulting',
       description: 'Technical consulting and architecture design for scalable applications.',
       features: ['System Architecture', 'Code Review', 'Technical Strategy', 'Team Training'],
-      price: '$150/hour',
+      price: '$50/hour',
       timeline: 'Flexible'
     }
   ];

@@ -13,19 +13,19 @@ const Services = () => {
       icon: Globe,
       title: 'Web Development',
       description: 'Modern, responsive web applications built with cutting-edge technologies.',
-      features: ['React/Next.js', 'Full-Stack Solutions', 'Performance Optimization']
+      features: ['React/Next.js, Python Flask', 'Full-Stack Solutions', 'Performance Optimization']
     },
     {
       icon: Smartphone,
       title: 'Mobile Apps',
       description: 'Cross-platform mobile applications with native performance and modern UI.',
-      features: ['Flutter Development', 'Database Integration', 'Responsive Design']
+      features: ['Flutter Development, React Native', 'Database Integration', 'Responsive Design']
     },
     {
       icon: Code,
       title: 'Consulting',
       description: 'Technical consulting and architecture design for scalable applications.',
-      features: ['System Architecture', 'Code Review', 'Technical Strategy']
+      features: ['System Architecture', 'Technical Strategy']
     }
   ];
 

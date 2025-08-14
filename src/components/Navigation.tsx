@@ -1,27 +1,58 @@
-
 import { useState } from 'react';
 import { Menu, X, Download } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDownloading, setIsDownloading] = useState(false);
   const location = useLocation();
 
   const navItems = [
     { name: 'Home', href: '/' },
     { name: 'Services', href: '/services' },
-    { name: 'Works', href: '/works' },
+    // { name: 'Works', href: '/works' },
     { name: 'Tools', href: '/tools' },
     { name: 'Contact', href: '/contact' },
   ];
 
-  const handleResumeDownload = () => {
-    // You can replace this with your actual resume URL
-    const resumeUrl = '/resume.pdf';
-    const link = document.createElement('a');
-    link.href = resumeUrl;
-    link.download = 'Bamidele_Resume.pdf';
-    link.click();
+  const handleResumeDownload = async () => {
+    setIsDownloading(true);
+    try {
+      // Use the actual filename from your public folder
+      const resumeUrl = '/Tewogbade_Bamidele_.pdf'; // URL encoded space
+      
+      // Create a temporary link element
+      const link = document.createElement('a');
+      link.href = resumeUrl;
+      link.download = 'Tewogbade_Bamidele_Resume.pdf'; // Clean filename for download
+      link.target = '_blank'; // Open in new tab as fallback
+      
+      // Append to body, click, and remove
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Alternative method using fetch (more reliable)
+      // const response = await fetch(resumeUrl);
+      // if (response.ok) {
+      //   const blob = await response.blob();
+      //   const url = window.URL.createObjectURL(blob);
+      //   const link = document.createElement('a');
+      //   link.href = url;
+      //   link.download = 'Tewogbade_Bamidele_Resume.pdf';
+      //   link.click();
+      //   window.URL.revokeObjectURL(url);
+      // } else {
+      //   // Fallback: open in new tab
+      //   window.open(resumeUrl, '_blank');
+      // }
+    } catch (error) {
+      console.error('Download failed:', error);
+      // Fallback: open in new tab for viewing
+      window.open('/Tewogbade%20Bamidele_.pdf', '_blank');
+    } finally {
+      setIsDownloading(false);
+    }
   };
 
   return (
@@ -48,10 +79,11 @@ const Navigation = () => {
             ))}
             <button
               onClick={handleResumeDownload}
-              className="btn-outline flex items-center gap-2"
+              disabled={isDownloading}
+              className="btn-outline flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <Download size={16} />
-              Resume
+              <Download size={16} className={isDownloading ? 'animate-bounce' : ''} />
+              {isDownloading ? 'Downloading...' : 'Resume'}
             </button>
           </div>
 
@@ -83,10 +115,11 @@ const Navigation = () => {
                   handleResumeDownload();
                   setIsOpen(false);
                 }}
-                className="btn-outline flex items-center gap-2 w-fit"
+                disabled={isDownloading}
+                className="btn-outline flex items-center gap-2 w-fit disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Download size={16} />
-                Resume
+                <Download size={16} className={isDownloading ? 'animate-bounce' : ''} />
+                {isDownloading ? 'Downloading...' : 'Resume'}
               </button>
             </div>
           </div>

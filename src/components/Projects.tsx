@@ -3,59 +3,50 @@ import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 const Projects = () => {
   const projects = [
     {
-      title: 'AI Chat Platform',
-      description: 'Modern chat application with AI-powered responses and real-time messaging.',
-      image: '/api/placeholder/400/250',
-      technologies: ['React', 'OpenAI', 'WebSocket', 'Node.js'],
+      title: 'Gifted',
+      description: 'Academic competition training platform founded by former Olympiad medalists, specializing in nurturing student talent through expert coaching and proven methodologies.',
+      image: 'gifted.png',
+      technologies: ['React','Node.js'],
+      demoLink: 'giftededu.tech',
+      codeLink: '#',
+      featured: true
+    },
+    {
+      title: 'Arlo Cantoments CRM',
+      description: 'Comprehensive CRM platform for managing customer relationships, sales pipelines, and marketing campaigns with AI-driven insights.',
+      image: '/arlo.png',
+      technologies: ['Voiceflow', 'Supabase', 'Make', 'React', 'Google Gemini'],
       demoLink: '#',
       codeLink: '#',
       featured: true
     },
     {
-      title: 'Fintech Dashboard',
-      description: 'Financial analytics dashboard with payment processing and reporting.',
+      title: 'Considerate Study',
+      description: 'Making global education accessible through expert IELTS coaching and personalized study abroad consultancy services.',
       image: '/api/placeholder/400/250',
-      technologies: ['Flutter', 'Firebase', 'Payment APIs', 'Charts'],
-      demoLink: '#',
-      codeLink: '#',
-      featured: true
-    },
-    {
-      title: 'Campus Management App',
-      description: 'Comprehensive campus solution for students and faculty management.',
-      image: '/api/placeholder/400/250',
-      technologies: ['Flutter', 'Python', 'PostgreSQL', 'REST API'],
-      demoLink: '#',
+      technologies: ['React', 'Supabase', 'Google Gemini'],
+      demoLink: 'consideratestudy.com',
       codeLink: '#',
       featured: false
     },
     {
-      title: 'Trading Bot',
-      description: 'Automated cryptocurrency trading bot with machine learning predictions.',
+      title: 'BVM Digital',
+      description: 'Modern digital marketing website with AI-powered customer support automation, lead generation optimization, and integrated appointment booking system.',
       image: '/api/placeholder/400/250',
-      technologies: ['Python', 'ML', 'Binance API', 'TensorFlow'],
-      demoLink: '#',
+      technologies: ['React', 'Typescript', 'Voiceflow', 'Make'],
+      demoLink: 'b-vm.com',
       codeLink: '#',
       featured: false
     },
     {
-      title: 'Developer Tools',
-      description: 'Suite of productivity tools for developers and code automation.',
+      title: 'Tently',
+      description: 'Mobile contributions platform that transforms traditional Ajo group savings through digital tracking, automated payments, and transparent member management.',
       image: '/api/placeholder/400/250',
-      technologies: ['TypeScript', 'CLI Tools', 'VS Code', 'Automation'],
+      technologies: ['Flutter', 'Python', 'Supabase', 'Payment APIs'],
       demoLink: '#',
       codeLink: '#',
       featured: false
     },
-    {
-      title: 'E-Learning Platform',
-      description: 'Interactive learning platform with AI-powered course recommendations.',
-      image: '/api/placeholder/400/250',
-      technologies: ['Next.js', 'AI/ML', 'Video Streaming', 'Analytics'],
-      demoLink: '#',
-      codeLink: '#',
-      featured: false
-    }
   ];
 
   const featuredProjects = projects.filter(p => p.featured);
@@ -81,13 +72,25 @@ const Projects = () => {
               className="glass hover-glow rounded-lg overflow-hidden group animate-fade-in"
               style={{ animationDelay: `${(index + 1) * 200}ms` }}
             >
-              <div className="aspect-video bg-gradient-to-br from-dark-lighter to-accent relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
+              <div className="aspect-video relative overflow-hidden">
+                <img 
+                  src={project.image} 
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  // onError={(e) => {
+                  //   // Fallback to gradient background if image fails to load
+                  //   e.target.style.display = 'none';
+                  //   e.target.nextSibling.style.display = 'flex';
+                  // }}
+                />
+                {/* Fallback gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-dark-lighter to-accent items-center justify-center hidden">
                   <div className="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center">
                     <ExternalLink size={24} className="text-gold" />
                   </div>
                 </div>
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gold/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               
               <div className="p-6">

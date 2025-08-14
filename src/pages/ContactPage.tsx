@@ -9,7 +9,7 @@ const ContactPage = () => {
       id: 'email',
       icon: Mail,
       title: 'Email Me',
-      value: 'bamidele@example.com',
+      value: 'bishoptewogbade@gmail.com',
       description: 'Best for detailed project discussions',
       color: 'from-blue-500/20 to-cyan-500/20',
       link: 'mailto:bamidele@example.com'
@@ -18,26 +18,17 @@ const ContactPage = () => {
       id: 'whatsapp',
       icon: MessageCircle,
       title: 'WhatsApp',
-      value: '+234 xxx xxx xxxx',
+      value: '+234 706 170 1552',
       description: 'Quick questions and instant responses',
       color: 'from-green-500/20 to-emerald-500/20',
       link: 'https://wa.me/234xxxxxxxxx'
     },
-    {
-      id: 'calendar',
-      icon: Calendar,
-      title: 'Schedule Call',
-      value: 'Book 30min slot',
-      description: 'Perfect for project consultations',
-      color: 'from-purple-500/20 to-pink-500/20',
-      link: '#'
-    }
   ];
 
   const socialLinks = [
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Twitter, href: '#', label: 'Twitter' }
+    { icon: Linkedin, href: 'https://www.linkedin.com/in/bamidele-tewogbade/', label: 'LinkedIn' },
+    { icon: Github, href: 'https://github.com/bamideletewogbade', label: 'GitHub' },
+    { icon: Twitter, href: 'https://x.com/_tewogbade', label: 'Twitter' }
   ];
 
   return (
