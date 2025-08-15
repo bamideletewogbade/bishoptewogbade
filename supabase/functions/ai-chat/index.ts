@@ -15,7 +15,7 @@ serve(async (req) => {
 
   try {
     const { message } = await req.json();
-    const GEMINI_API_KEY = "9894758899682d8dea81306f813998255f50ec3a20d588876f0cf5756ec39841";
+    const GEMINI_API_KEY = "AIzaSyDDdJqhP3eo94wSkrFugcP0FafMJFn75kE";
 
     if (!GEMINI_API_KEY) {
       throw new Error('GEMINI_API_KEY is not set');
@@ -27,13 +27,12 @@ serve(async (req) => {
 
 RESPONSE STYLE:
 - Be conversational and friendly
-- Use bullet points for multiple items
 - Include specific metrics when relevant
 - For detailed questions, offer to connect: "Let's discuss your project - reach out at bishoptewogbade@gmail.com"
 - For technical skills: Focus on 3-4 most relevant technologies
 - For experience: Highlight current role + 1-2 key achievements
 - Always end complex queries with a call-to-action
-- Respond with about <100 characters of text
+- Respond with about 100 characters of text or less, be concise
 
 PERSONAL INFORMATION:
 - Full Name: Olusegun Tewogbade (goes by Bamidele)
