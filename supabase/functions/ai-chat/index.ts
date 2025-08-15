@@ -15,13 +15,17 @@ serve(async (req) => {
 
   try {
     const { message } = await req.json();
-    const GEMINI_API_KEY = "AIzaSyDDdJqhP3eo94wSkrFugcP0FafMJFn75kE";
+    
+    // Get the API key from Supabase secrets
+    const GEMINI_API_KEY = Deno.env.get('GEMINI_API_KEY');
 
     if (!GEMINI_API_KEY) {
-      throw new Error('GEMINI_API_KEY is not set');
+      console.error('GEMINI_API_KEY is not set in Supabase secrets');
+      throw new Error('GEMINI_API_KEY is not configured');
     }
 
     console.log('Received message:', message);
+    console.log('Using API key (first 10 chars):', GEMINI_API_KEY.substring(0, 10) + '...');
 
    const portfolioContext = `You are Bamidele Tewogbade's AI assistant, embedded on his portfolio website. You have comprehensive access to his professional information:
 
@@ -176,65 +180,126 @@ AVAILABILITY:
 COMMUNICATION STYLE:
 Answer questions about Bamidele's experience, skills, projects, and services professionally and comprehensively. Provide specific metrics and achievements when relevant. If users ask about his work samples or detailed project examples, guide them to explore the portfolio sections. For collaboration inquiries, provide his contact information and highlight his remote work capabilities. Emphasize his unique combination of backend expertise, AI specialization, and proven results in financial services.`;
 
-    // Updated to use the correct Gemini model endpoint
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contents: [{
-          parts: [{
-            text: `${portfolioContext}\n\nUser question: ${message}`
-          }]
-        }],
-        generationConfig: {
-          temperature: 0.7,
-          topK: 40,
-          topP: 0.95,
-          maxOutputTokens: 1024,
-        },
-        safetySettings: [
-          {
-            category: "HARM_CATEGORY_HARASSMENT",
-            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-          },
-          {
-            category: "HARM_CATEGORY_HATE_SPEECH",
-            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-          },
-          {
-            category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-          },
-          {
-            category: "HARM_CATEGORY_DANGEROUS_CONTENT",
-            threshold: "BLOCK_MEDIUM_AND_ABOVE"
-          }
-        ]
-      }),
-    });
+    console.log('Making request to Gemini API...');
 
-    if (!response.ok) {
-      const errorData = await response.text();
-      console.error('Gemini API error:', errorData);
-      throw new Error(`Gemini API error: ${response.status} - ${errorData}`);
+    // Updated to use the correct Gemini model endpoint with retry logic
+    const maxRetries = 3;
+    let lastError;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        console.log(`Attempt ${attempt} to call Gemini API`);
+        
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: `${portfolioContext}\n\nUser question: ${message}`
+              }]
+            }],
+            generationConfig: {
+              temperature: 0.7,
+              topK: 40,
+              topP: 0.95,
+              maxOutputTokens: 1024,
+            },
+            safetySettings: [
+              {
+                category: "HARM_CATEGORY_HARASSMENT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_HATE_SPEECH",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              },
+              {
+                category: "HARM_CATEGORY_DANGEROUS_CONTENT",
+                threshold: "BLOCK_MEDIUM_AND_ABOVE"
+              }
+            ]
+          }),
+        });
+
+        console.log('Gemini API response status:', response.status);
+
+        if (!response.ok) {
+          const errorData = await response.text();
+          console.error(`Gemini API error (attempt ${attempt}):`, errorData);
+          
+          // Parse error for better handling
+          let errorObj;
+          try {
+            errorObj = JSON.parse(errorData);
+          } catch {
+            errorObj = { error: { message: errorData } };
+          }
+          
+          const errorMessage = errorObj.error?.message || 'Unknown error';
+          
+          // If it's a 503 (overloaded) error, wait and retry
+          if (response.status === 503 && attempt < maxRetries) {
+            console.log(`Model overloaded, waiting before retry...`);
+            await new Promise(resolve => setTimeout(resolve, 2000 * attempt)); // Exponential backoff
+            lastError = new Error(`Gemini API error (${response.status}): ${errorMessage}`);
+            continue;
+          }
+          
+          throw new Error(`Gemini API error (${response.status}): ${errorMessage}`);
+        }
+
+        const data = await response.json();
+        console.log('Gemini response received successfully');
+
+        const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 
+          "I'm sorry, I couldn't process your request at the moment. Please try again or contact Bamidele directly.";
+
+        return new Response(JSON.stringify({ response: aiResponse }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+
+      } catch (error) {
+        console.error(`Error on attempt ${attempt}:`, error);
+        lastError = error;
+        
+        // If it's not the last attempt and it's a network/overload error, continue
+        if (attempt < maxRetries && (error.message.includes('503') || error.message.includes('overloaded'))) {
+          await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+          continue;
+        }
+        
+        // If it's an API key error, don't retry
+        if (error.message.includes('API key not valid') || error.message.includes('400')) {
+          break;
+        }
+      }
     }
 
-    const data = await response.json();
-    console.log('Gemini response:', data);
-
-    const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || 
-      "I'm sorry, I couldn't process your request at the moment. Please try again or contact Bamidele directly.";
-
-    return new Response(JSON.stringify({ response: aiResponse }), {
-      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-    });
+    // If we get here, all retries failed
+    throw lastError || new Error('All retry attempts failed');
 
   } catch (error) {
     console.error('Error in ai-chat function:', error);
+    
+    let errorMessage = 'Failed to process your message. Please try again.';
+    
+    if (error.message.includes('API key not valid')) {
+      errorMessage = 'API configuration issue. Please contact the administrator.';
+    } else if (error.message.includes('overloaded')) {
+      errorMessage = 'The AI service is currently overloaded. Please try again in a moment.';
+    } else if (error.message.includes('GEMINI_API_KEY is not configured')) {
+      errorMessage = 'AI service is not properly configured. Please contact the administrator.';
+    }
+    
     return new Response(JSON.stringify({ 
-      error: 'Failed to process your message. Please try again.',
+      error: errorMessage,
       details: error.message 
     }), {
       status: 500,
